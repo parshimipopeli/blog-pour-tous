@@ -20,15 +20,26 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ path('blog') }}">Articles</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('blog_create') }}">Écrire un article !</a>
-            </li>
+            {% if app.user %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('blog_create') }}">Écrire un article !</a>
+                </li>
+            {% endif %}
             <li class="nav-item">
                 <a class="nav-link" href="{{ path('security_registration') }}">Inscription</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('security_login') }}">Connexion</a>
-            </li>
+
+            {% if app.user %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('security_logout') }}">Deconnexion</a>
+                </li>
+
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('security_login') }}">Connexion</a>
+                </li>
+
+            {% endif %}
         </ul>
 
 

@@ -27,13 +27,11 @@ class UsersBlog implements UserInterface
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Email()
-     * @Assert\Blank()
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\Blank()
      */
     private $userName;
 
