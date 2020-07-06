@@ -3,7 +3,10 @@
 {% block title %}Hello BlogController!{% endblock %}
 
 {% block body %}
-
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ path('home') }}">Acceuil</a></li>
+        <li class="breadcrumb-item active">Liste articles</li>
+    </ol>
     <section class="articles">
         {% for article in articles %}
 
@@ -19,12 +22,12 @@
                 <div class="image d-flex justify-content-center">
                     <img class="img-responsive " src="{{ article.image }}" alt="">
                 </div>
-                <div class="content">
-                <p class="text-center">{{ article.content | raw }}</p>
+                <div class="content mt-40">
+                    <p class="text-center border border-danger">{{ article.content  | striptags | slice(0, 300) |raw }}
+                        ...</p>
                 </div>
-                <p class="lead">
+                <p class="lead text-center">
                     <a href="{{ path('blog_show', {'id': article.id}) }}" class="btn btn-primary">Lire la suite</a></p>
-                {#                    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>#}
                 </p>
             </div>
             <article>

@@ -15,13 +15,17 @@ security:
       security: false
     main:
       anonymous: true
-      #            lazy: true
+#                  lazy: true
       #            provider: users_in_memory
       provider: in_database
 
       form_login:
         login_path: security_login
-        check_path: serurity_login
+        check_path: login_check
+
+#        logout:
+#          path: security_logout
+#          target: blog
 
       # activate different ways to authenticate
       # https://symfony.com/doc/current/security.html#firewalls-authentication
