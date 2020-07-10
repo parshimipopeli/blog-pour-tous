@@ -2,38 +2,49 @@
 
 {% block body %}
 
-    <article>
-        <div class="container">
-            <h2>{{ article.title }}</h2>
-            <div class="metadata">ÉCRIT LE {{ article.createdAt | date('d/m/Y') }}
-                À {{ article.createdAt | date('H:i') }} dans la catégorie {{ article.category.title }}
-            </div>
-            <div class="content">
-                <img src="{{ article.image }}" alt="">
-                {{ article.content | raw }}
+    <div class="card mb-3">
+        <h1 class="text-center">{{ article.title }}</h1>
+        <hr class="bg-danger">
+        <div class="card-body">
+            <h6 class="text-center">Écrit le {{ article.createdAt | date('d/m/Y') }}
+        </div>
+        <img class="responsive" style="height: auto; width: 100%; display: block;" src="{{ article.image }}">
+        <div class="card-body">
+            <p class="card-text">{{ article.content  | raw }}</p>
+        </div>
+
+
+    </div>
+
+    <h2 class="text-center text-danger">{{ article.comments | length }} Commentaires :</h2>
+    {% for comment in article.comments %}
+        <div class="card border-light mb-3" style="max-width: 120rem;">
+            <div class="card-header text-center">Auteur du commentaire : {{ comment.author }}</div>
+            <div class="card-body">
+                <h5 class="list-group-item text-center">
+                    <small>Commentaire écrit le : {{ comment.createdAt | date('d/m/Y à H:i') }}</small></h5>
+                <p class="card-text">{{ comment.content | striptags | raw }}</p>
             </div>
         </div>
-    </article>
-    <section id="commentaires">
-        <h2 class="text-center text-danger">{{ article.comments | length }} Commentaires :</h2>
-        {% for comment in article.comments %}
-            <div class="comment">
-                <div class="row">
-                    <div class="col-3">
-                        {{ comment.author }} (<small>{{ comment.createdAt | date('d/m/Y à H:i') }}</small>
-                    </div>
-                    <div class="col">
-                        {{ comment.content | raw }}
-                    </div>
-                </div>
-            </div>
-        {% endfor %}
 
+    {% endfor %}
+
+
+
+    {% if app.user %}
         {{ form_start(commentForm) }}
         {{ form_row(commentForm.author, {'attr': {'placeholder': "votre nom"}}) }}
-        {{ form_row(commentForm.content, {'attr': {'placeholder': "Votre commentaire"}}) }}
-        <button class="btn btn-success" type="submit">Commenter !</button>
+        {{ form_row(commentForm.content, {'attr': {'placeholder': "votre commentaire"}}) }}
+        <button type="submit" class="btn btn-success">Commenter</button>
         {{ form_end(commentForm) }}
-         </section>
+    {% else %}
+        <h2 class="text-center text-danger">Vous ne pouvez pas commenter si vous n' etes pas connecté !</h2>
+        <a href="{{ path('security_login') }}" class="btn btn-primary">connexion</a>
+    {% endif %}
+
+
+    </section>
 
 {% endblock %}
+
+

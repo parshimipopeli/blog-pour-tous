@@ -11,7 +11,6 @@
         {% for article in articles %}
 
 
-
             <div class="jumbotron">
                 <h1 class="text-center">{{ article.title }}</h1>
                 <hr class="bg-danger">
@@ -23,7 +22,7 @@
                     <img class="img-responsive " src="{{ article.image }}" alt="">
                 </div>
                 <div class="content mt-40">
-                    <p class="text-center border border-danger">{{ article.content  | striptags | slice(0, 300) |raw }}
+                    <p class="text-center border border-danger">{{ article.content  | striptags | slice(0, 300) | raw }}
                         ...</p>
                 </div>
                 <p class="lead text-center">
@@ -32,10 +31,7 @@
             </div>
             <article>
 
-                <div class="metadata"></div>
-                <div class="content">
 
-                </div>
             </article>
 
         {% endfor %}

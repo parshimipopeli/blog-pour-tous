@@ -7,6 +7,7 @@ use App\Entity\Comment;
 use App\Form\ArticleType;
 use App\Form\CommentType;
 use App\Repository\ArticleRepository;
+use App\Repository\CommentRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,7 +22,7 @@ class BlogController extends AbstractController
      */
     public function index(ArticleRepository $repo)
     {
-        $articles = $repo->findBy([],['createdAt' => 'DESC']);
+        $articles = $repo->findBy([], ['createdAt' => 'DESC']);
 
         return $this->render('blog/index.html.twig', [
             'controller_name' => 'BlogController',
@@ -75,15 +76,34 @@ class BlogController extends AbstractController
     /**
      * @route("/blog/{id}", name="blog_show")
      */
-    public function show(Article $article)
+    public function show(CommentRepository $repo, Article $article, Request $request, EntityManagerInterface $em)
     {
+
         $comment = new Comment();
+
         $form = $this->createForm(CommentType::class, $comment);
+
+        $form->handleRequest($request);
+        $comment = $repo->findBy([],['createdAt' => 'DESC']);
+
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $comment->setCreatedAt(new\DateTime())
+                ->setArticle($article);
+
+            $em->persist($comment);
+            $em->flush();
+
+
+            return $this->redirectToRoute('blog_show', ['id' => $article->getId()]);
+
+        }
 
         return $this->render('blog/show.html.twig', [
             'article' => $article,
             'commentForm' => $form->createView()
         ]);
+
     }
 
 
