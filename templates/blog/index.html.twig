@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello BlogController!{% endblock %}
+{% block title %}Le blog pour tous !{% endblock %}
 
 {% block body %}
     <ol class="breadcrumb">
@@ -9,33 +9,23 @@
     </ol>
     <section class="articles">
         {% for article in articles %}
-
-
-            <div class="jumbotron">
-                <h1 class="text-center">{{ article.title }}</h1>
-                <hr class="bg-danger">
-                <h6 class="text-center">Écrit le {{ article.createdAt | date('d/m/Y') }}
-                    À {{ article.createdAt | date('H:i') }}
-                    dans la catégorie politique</h6>
-                <hr class="my-1 bg-danger">
-                <div class="image d-flex justify-content-center">
-                    <img class="img-responsive " src="{{ article.image }}" alt="">
+            <div class="card border-light mt-100" style="max-width: 120rem;">
+                <div class="card-header text-center">
+                    <h2>{{ article.title }}</h2>
                 </div>
-                <div class="content mt-40">
-                    <p class="text-center border border-danger">{{ article.content  | striptags | slice(0, 300) | raw }}
-                        ...</p>
+                <div class="image d-flex justify-content-center">
+                    <img class="responsive" style="height: auto; width: 35%; display: block;" src="{{ article.image }}">
+                </div>
+                <div class="card-body">
+                    <h5 class="list-group-item text-center">
+                        <small>Écrit le {{ article.createdAt | date('d/m/Y') }}
+                            dans la catégorie {{ article.category.title }}</small></h5>
+                    <p class="card-text">{{ article.content  | striptags | slice(0, 300) | raw }}....</p>
                 </div>
                 <p class="lead text-center">
                     <a href="{{ path('blog_show', {'id': article.id}) }}" class="btn btn-primary">Lire la suite</a></p>
                 </p>
             </div>
-            <article>
-
-
-            </article>
-
         {% endfor %}
-
-
     </section>
 {% endblock %}

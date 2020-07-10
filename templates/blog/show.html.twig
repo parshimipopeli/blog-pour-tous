@@ -2,19 +2,22 @@
 
 {% block body %}
 
-    <div class="card mb-3">
-        <h1 class="text-center">{{ article.title }}</h1>
-        <hr class="bg-danger">
-        <div class="card-body">
-            <h6 class="text-center">Écrit le {{ article.createdAt | date('d/m/Y') }}
+    <div class="card border-light pt-50 " style="max-width: 120rem;">
+        <div class="card-header text-center">{{ article.title }}</div>
+        <div class="image d-flex justify-content-center">
+            <img class="responsive" style="height: auto; width: 35%; display: block;" src="{{ article.image }}">
         </div>
-        <img class="responsive" style="height: auto; width: 100%; display: block;" src="{{ article.image }}">
         <div class="card-body">
+            <h5 class="list-group-item text-center">
+                <small>Écrit le {{ article.createdAt | date('d/m/Y') }}</small></h5>
             <p class="card-text">{{ article.content  | raw }}</p>
         </div>
-
-
     </div>
+
+
+
+
+
 
     <h2 class="text-center text-danger">{{ article.comments | length }} Commentaires :</h2>
     {% for comment in article.comments %}

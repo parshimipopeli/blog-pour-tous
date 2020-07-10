@@ -10,6 +10,7 @@ use App\Repository\ArticleRepository;
 use App\Repository\CommentRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,9 +21,13 @@ class BlogController extends AbstractController
     /**
      * @Route("/blog", name="blog")
      */
-    public function index(ArticleRepository $repo)
+    public function index(ArticleRepository $repo, PaginatorInterface $paginator)
     {
         $articles = $repo->findBy([], ['createdAt' => 'DESC']);
+
+
+
+
 
         return $this->render('blog/index.html.twig', [
             'controller_name' => 'BlogController',
@@ -84,7 +89,6 @@ class BlogController extends AbstractController
         $form = $this->createForm(CommentType::class, $comment);
 
         $form->handleRequest($request);
-        $comment = $repo->findBy([],['createdAt' => 'DESC']);
 
 
         if ($form->isSubmitted() && $form->isValid()) {
