@@ -3,10 +3,23 @@
 {% block title %}Le blog pour tous !{% endblock %}
 
 {% block body %}
+
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ path('home') }}">Acceuil</a></li>
         <li class="breadcrumb-item active">Liste articles</li>
     </ol>
+    <div class="categorys d-flex justify-content-center">
+        <label for="select-category">Choisissez votre catégorie</label>
+        <select name="choise-cat" type="select">
+            {% for article in articles %}
+                <option value="">
+                    {{ article.title }}
+                </option>
+            {% endfor %}
+
+
+        </select>
+    </div>
     <section class="articles">
         {% for article in articles %}
             <div class="card border-light mt-100" style="max-width: 120rem;">
@@ -17,9 +30,11 @@
                     <img class="responsive" style="height: auto; width: 35%; display: block;" src="{{ article.image }}">
                 </div>
                 <div class="card-body">
-                    <h5 class="list-group-item text-center">
-                        <small>Écrit le {{ article.createdAt | date('d/m/Y') }}
-                            dans la catégorie {{ article.category.title }}</small></h5>
+                    <p class="list-group-item text-center text-danger">Écrit le {{ article.createdAt | date('d/m/Y') }}
+                        à {{ article.createdAt | date('H:i') }}
+                        dans la catégorie {{ article.category.title }} par
+                        <mark>{{ article.author }}</mark>
+                    </p>
                     <p class="card-text">{{ article.content  | striptags | slice(0, 300) | raw }}....</p>
                 </div>
                 <p class="lead text-center">
