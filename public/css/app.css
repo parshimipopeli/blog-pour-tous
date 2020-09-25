@@ -18,3 +18,11 @@
 .scrollbar-black {
     scrollbar-color: #000 #F5F5F5;
 }
+
+.categorys {
+    padding-bottom: 25px;
+}
+
+.article {
+    margin-bottom: 15px !important;
+}

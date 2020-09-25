@@ -20,9 +20,9 @@
 
         </select>
     </div>
-    <section class="articles">
+    <section class="articles row ">
         {% for article in articles %}
-            <div class="card border-light mt-100" style="max-width: 120rem;">
+            <div class=" article col-sm-12 col-lg-6 card border-light " style="max-width: 120rem;">
                 <div class="card-header text-center">
                     <h2>{{ article.title }}</h2>
                 </div>
@@ -41,6 +41,7 @@
                     <a href="{{ path('blog_show', {'id': article.id}) }}" class="btn btn-primary">Lire la suite</a></p>
                 </p>
             </div>
+
         {% endfor %}
     </section>
 {% endblock %}
