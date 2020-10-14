@@ -19,6 +19,26 @@
     scrollbar-color: #000 #F5F5F5;
 }
 
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 200;
+}
+
+nav>ul {
+  margin: 0;
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  background: red
+}
+
+nav>ul>li {
+  padding: 10px;
+}
+
+  
 .categorys {
     padding-bottom: 25px;
 }

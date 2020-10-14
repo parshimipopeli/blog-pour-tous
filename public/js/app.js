@@ -1,3 +1,5 @@
-$( function() {
-    $( "#accordion" ).accordion();
-} );
+$(document).ready(function () {
+
+    alert('hello');
+
+}

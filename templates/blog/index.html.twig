@@ -13,7 +13,7 @@
         <select name="choise-cat" type="select">
             {% for article in articles %}
                 <option value="">
-                    {{ article.title }}
+                    <a href="{{ path('blog', {'id': article.id}) }} ">{{ article.title }}</a>
                 </option>
             {% endfor %}
 

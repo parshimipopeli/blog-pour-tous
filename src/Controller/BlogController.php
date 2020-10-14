@@ -40,7 +40,6 @@ class BlogController extends AbstractController
         return $this->render('blog/home.html.twig', [
             'title' => "Bienvenue sur le blog pour tous !"
         ]);
-
     }
 
     /**
@@ -51,7 +50,6 @@ class BlogController extends AbstractController
     {
         if (!$article) {
             $article = new Article();
-
         }
 
         $form = $this->createForm(ArticleType::class, $article);
@@ -89,7 +87,7 @@ class BlogController extends AbstractController
 
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $comment->setCreatedAt(new\DateTime())
+            $comment->setCreatedAt(new \DateTime())
                 ->setArticle($article);
 
             $em->persist($comment);
@@ -97,15 +95,11 @@ class BlogController extends AbstractController
 
 
             return $this->redirectToRoute('blog_show', ['id' => $article->getId()]);
-
         }
 
         return $this->render('blog/show.html.twig', [
             'article' => $article,
             'commentForm' => $form->createView()
         ]);
-
     }
-
-
 }
