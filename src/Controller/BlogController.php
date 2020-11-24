@@ -21,9 +21,15 @@ class BlogController extends AbstractController
     /**
      * @Route("/blog", name="blog")
      */
-    public function index(ArticleRepository $repo, PaginatorInterface $paginator)
+    public function index(ArticleRepository $repo, PaginatorInterface $paginator, Request $request)
     {
         $articles = $repo->findBy([], ['createdAt' => 'DESC']);
+
+         $articles = $paginator->paginate(
+            $articles, // Requête contenant les données à paginer (ici nos articles)
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            6 // Nombre de résultats par page
+        );
 
 
         return $this->render('blog/index.html.twig', [
