@@ -1,47 +1,56 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Le blog pour tous !{% endblock %}
+{% block title %}Le blog pour tous !
+{% endblock %}
 
 {% block body %}
 
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{ path('home') }}">Acceuil</a></li>
-        <li class="breadcrumb-item active">Liste articles</li>
-    </ol>
-    <div class="categorys d-flex justify-content-center">
-        <label for="select-category">Choisissez votre catégorie</label>
-        <select name="choise-cat" type="select">
-            {% for article in articles %}
-                <option value="">
-                    <a href="{{ path('blog', {'id': article.id}) }} ">{{ article.title }}</a>
-                </option>
-            {% endfor %}
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item">
+			<a href="{{ path('home') }}">Acceuil</a>
+		</li>
+		<li class="breadcrumb-item active">Liste articles</li>
+	</ol>
+	<div class="categorys d-flex justify-content-center">
+		<label for="select-category">Choisissez votre catégorie</label>
+		<select name="choise-cat" type="select">
+			{% for article in articles %}
+				<option value="">
+					<a href="{{ path('blog', {'id': article.id}) }} ">{{ article.title }}</a>
+				</option>
+			{% endfor %}
 
+			div.hello
+		</select>
+	</div>
+	{% for row in articles|batch(3) %}
 
-        </select>
-    </div>
-    <section class="articles row ">
-        {% for article in articles %}
-            <div class=" article col-sm-12 col-lg-6 card border-light " style="max-width: 120rem;">
-                <div class="card-header text-center">
-                    <h2>{{ article.title }}</h2>
-                </div>
-                <div class="image d-flex justify-content-center">
-                    <img class="responsive" style="height: auto; width: 35%; display: block;" src="{{ article.image }}">
-                </div>
-                <div class="card-body">
-                    <p class="list-group-item text-center text-danger">Écrit le {{ article.createdAt | date('d/m/Y') }}
-                        à {{ article.createdAt | date('H:i') }}
-                        dans la catégorie {{ article.category.title }} par
-                        <mark>{{ article.author }}</mark>
-                    </p>
-                    <p class="card-text">{{ article.content  | striptags | slice(0, 300) | raw }}....</p>
-                </div>
-                <p class="lead text-center">
-                    <a href="{{ path('blog_show', {'id': article.id}) }}" class="btn btn-primary">Lire la suite</a></p>
-                </p>
-            </div>
-
-        {% endfor %}
-    </section>
+		<section class="articles row display-flex justify-content-center">
+			{% for article in row  %}
+				<div class="article col-sm-12 col-lg-3 col-md-3 ml-2 card border-light">
+					<div class="card-header text-center">
+						<h2>{{ article.title }}</h2>
+					</div>
+					<div class="image d-flex justify-content-center">
+						<img class="responsive" style="height: 15rem; width: 80%; display: block;" src="{{ article.image }}">
+					</div>
+					<div class="card-body">
+						<p class="list-group-item text-center text-info">Écrit le
+							{{ article.createdAt | date('d/m/Y') }}
+							à
+							{{ article.createdAt | date('H:i') }}
+							dans la catégorie
+							{{ article.category.title }}
+							par
+							{{ article.author }}
+						</p>
+						<p class="card-text">{{ article.content  | striptags | slice(0, 300) | raw }}....</p>
+					</div>
+					<p class="lead text-center">
+						<a href="{{ path('blog_show', {'id': article.id}) }}" class="btn btn-primary">Lire la suite</a>
+					</p>
+				</div>
+			{% endfor %}
+		</section>
+	{% endfor %}
 {% endblock %}
