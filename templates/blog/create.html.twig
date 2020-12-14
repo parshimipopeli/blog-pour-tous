@@ -3,25 +3,40 @@
 {% form_theme formArticle 'bootstrap_4_layout.html.twig' %}
 
 {% block body %}
-    <h1 class="text-center">Écrire un article !</h1>
-    <hr class="bg-danger">
+	<h1 class="text-center">
+		Écrire un article !
+	</h1>
+	<hr class="bg-danger">
 
-    {{ form_start(formArticle) }}
-    {{ form_row(formArticle.author, {'attr': {'placeholder': "votre nom"}}) }}
-    {{ form_row(formArticle.title, {'attr': {'placeholder': "Titre de l'article"}}) }}
-    {{ form_row(formArticle.category) }}
-    {{ form_row(formArticle.content, {'attr': {'placeholder': "Contenu de l' article"}}) }}
-    {{ form_row(formArticle.image, {'attr': {'placeholder': "URL de l'image"}}) }}
+	<div class="container mt-5">
+		<div class="col-md-6 mx-auto">
+
+			{{ form_start(formArticle) }}
+			{{ form_row(formArticle.author, {'attr': {'placeholder': "votre nom"}}
+			) }}
+			{{ form_row(formArticle.title, {'attr': {'placeholder': "Titre de l'article"}}
+			) }}
+			{{ form_row(formArticle.category) }}
+			{{ form_row(formArticle.content, {'attr': {'placeholder': "Contenu de l' article"}}
+			) }}
+			{{ form_row(formArticle.image, {'attr': {'placeholder': "URL de l'image"}}
+			) }}
 
 
-    <button type="submit" class="btn btn-success">
-        {% if editMode %}
-            Modifier l'article !
-        {% else %}
-            Ajouter l'article
-        {% endif %}
-    </button>
+			<button type="submit" class="btn btn-success">
+				{% if editMode %}
+					Modifier l'article !
+				{% else %}
+					Ajouter l'article
+				{% endif %}
+			</button>
 
 
-    {{ form_end(formArticle) }}
+			{{ form_end(formArticle) }}
+		</div>
+
+
+	</div>
+
+
 {% endblock %}
