@@ -2,7 +2,7 @@
     "type": "project",
     "license": "proprietary",
     "require": {
-        "php": "^7.2.5",
+        "php": "8.0.3",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "knplabs/knp-paginator-bundle": "^5.3",
@@ -73,10 +73,10 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
-        ],
-        "compile": [
-            "php bin/console doctrine:migrations:migrate"
         ]
+        // "compile": [
+        //     "php bin/console doctrine:migrations:migrate"
+        // ]
     },
     "conflict": {
         "symfony/symfony": "*"
