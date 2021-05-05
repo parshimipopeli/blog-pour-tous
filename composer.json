@@ -65,6 +65,9 @@
         "symfony/polyfill-php56": "*"
     },
     "scripts": {
+        "compile": [
+            "symfony console doctrine:migrations:migrate"
+        ],
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
@@ -75,9 +78,7 @@
         "post-update-cmd": [
             "@auto-scripts"
         ],
-        "compile": [
-            "symfony console doctrine:migrations:migrate"
-        ]
+        
         
     },
     "conflict": {
